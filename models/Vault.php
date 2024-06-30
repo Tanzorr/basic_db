@@ -1,15 +1,31 @@
 <?php
 
 namespace app\models;
-use yii\db\ActiveRecord;
 
-class Vault extends ActiveRecord
+use Yii;
+
+/**
+ * This is the model class for table "vaults".
+ *
+ * @property int $id
+ * @property string $name
+ * @property string|null $description
+ * @property string|null $created_at
+ * @property string|null $updated_at
+ */
+class Vault extends \yii\db\ActiveRecord
 {
+    /**
+     * {@inheritdoc}
+     */
     public static function tableName()
     {
-        return 'vault';
+        return 'vaults';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
@@ -20,6 +36,9 @@ class Vault extends ActiveRecord
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function attributeLabels()
     {
         return [
@@ -29,15 +48,5 @@ class Vault extends ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
-    }
-
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            $this->updated_at = date('Y-m-d H:i:s');
-            return true;
-        } else {
-            return false;
-        }
     }
 }
